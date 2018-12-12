@@ -725,9 +725,23 @@ HBITMAP IconToBitmap(HICON ahIcon, bool aDestroyIcon)
 }
 
 
+#define abs(x) ((x) >= 0 ? x : -x)
+
+bool comparePixel(unsigned long p1, unsigned long p2, unsigned int tolerance) {
+	unsigned int r1 = (p1 & 0xFF0000) >> (4*4);
+	unsigned int r2 = (p2 & 0xFF0000) >> (4*4);
+	unsigned int g1 = (p1 & 0x00FF00) >> (2*4);
+	unsigned int g2 = (p2 & 0x00FF00) >> (2*4);
+	unsigned int b1 = p1 & 0x0000FF;
+	unsigned int b2 = p2 & 0x0000FF;
+
+	return abs(r1-r2) <= tolerance &&
+		abs(g1-g2) <= tolerance &&
+		abs(b1-b2) <= tolerance;
+}
 
 // ResultType Line::ImageSearch(int aLeft, int aTop, int aRight, int aBottom, char *aImageFile)
-char* WINAPI ImageSearch(int aLeft, int aTop, int aRight, int aBottom, char *aImageFile)
+char* WINAPI ImageSearch(int aLeft, int aTop, int aRight, int aBottom, int tolerance, char *aImageFile)
 // Author: ImageSearch was created by Aurelian Maga.
 {
 	// Many of the following sections are similar to those in PixelSearch(), so they should be
@@ -969,7 +983,7 @@ char* WINAPI ImageSearch(int aLeft, int aTop, int aRight, int aBottom, char *aIm
 			// The following check is ordered for short-circuit performance.  In addition, image_mask, if
 			// non-NULL, is used to determine which pixels are transparent within the image and thus should
 			// match any color on the screen.
-			if ((screen_pixel[i] == image_pixel[0] // A screen pixel has been found that matches the image's first pixel.
+			if ((comparePixel(screen_pixel[i], image_pixel[0], tolerance) // A screen pixel has been found that matches the image's first pixel.
 				|| image_mask && image_mask[0]     // Or: It's an icon's transparent pixel, which matches any color.
 				|| image_pixel[0] == trans_color)  // This should be okay even if trans_color==CLR_NONE, since CLR_NONE should never occur naturally in the image.
 				&& image_height <= screen_height - i/screen_width // Image is short enough to fit in the remaining rows of the search region.
@@ -979,7 +993,7 @@ char* WINAPI ImageSearch(int aLeft, int aTop, int aRight, int aBottom, char *aIm
 				// matches that of the image -- is a pixel-for-pixel match of the image.
 				for (found = true, x = 0, y = 0, j = 0, k = i; j < image_pixel_count; ++j)
 				{
-					if (!(found = (screen_pixel[k] == image_pixel[j] // At least one pixel doesn't match, so this candidate is discarded.
+					if (!(found = (comparePixel(screen_pixel[k], image_pixel[j], tolerance) // At least one pixel doesn't match, so this candidate is discarded.
 						|| image_mask && image_mask[j]      // Or: It's an icon's transparent pixel, which matches any color.
 						|| image_pixel[j] == trans_color))) // This should be okay even if trans_color==CLR_NONE, since CLR none should never occur naturally in the image.
 						break;

@@ -30,6 +30,6 @@ void _tmain()
 	int z;
 	HBITMAP hbmp = LoadPicture("c:\\pic.bmp",0,0,z,0,0);
 	char *answer="";
-	answer = ImageSearch(0,0,1024,768,"c:\\pic.bmp");
+	answer = ImageSearch(0,0,1024,768,0,"c:\\pic.bmp");
 	return;
 }
