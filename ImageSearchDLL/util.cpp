@@ -726,10 +726,6 @@ HBITMAP IconToBitmap(HICON ahIcon, bool aDestroyIcon)
 
 
 
-int WINAPI ImageTest(int a)
-{
-	return a + a;
-}
 // ResultType Line::ImageSearch(int aLeft, int aTop, int aRight, int aBottom, char *aImageFile)
 char* WINAPI ImageSearch(int aLeft, int aTop, int aRight, int aBottom, char *aImageFile)
 // Author: ImageSearch was created by Aurelian Maga.
