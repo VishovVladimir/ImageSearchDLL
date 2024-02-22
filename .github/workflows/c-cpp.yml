@@ -8,21 +8,19 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
-      
-    - name: Set up build environment
-      run: |
-        # Set up environment variables for building
-        & "C:\Program Files (x86)\Microsoft Visual Studio 8\VC\vcvarsall.bat" x86
-        $env:Path += ";C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Bin"
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up MSVC environment
+      uses: microsoft/setup-msbuild@v1
 
     - name: Build DLL
       run: |
-        # Build the DLL using MSBuild
-        msbuild /p:Configuration=Release
+        cd ImageSearchDLL
+        msbuild /t:Rebuild /p:Configuration=Release
 
     - name: Upload DLL artifact
       uses: actions/upload-artifact@v2
       with:
         name: ImageSearchDLL
-        path: path/to/your/DLL/file.dll
+        path: ImageSearchDLL/bin/Release/*.dll
