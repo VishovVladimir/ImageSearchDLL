@@ -64,7 +64,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>kernel32.lib;wsock32.lib;winmm.lib;version.lib;comctl32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ModuleDefinitionFile>$(SolutionDir)ImageSearchDLL.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>D:\a\ImageSearchDLL\ImageSearchDLL.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -79,7 +79,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <ModuleDefinitionFile>$(SolutionDir)..\ImageSearchDLL.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>D:\a\ImageSearchDLL\ImageSearchDLL.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
