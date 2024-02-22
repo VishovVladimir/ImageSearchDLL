@@ -1,0 +1,41 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Install Visual C++ 2005 Express
+      run: |
+        # Download and install Visual C++ 2005 Express
+
+    - name: Install Windows Server 2003 R2 Platform SDK
+      run: |
+        # Download and install Windows Server 2003 R2 Platform SDK
+
+    - name: Set up build environment
+      run: |
+        # Set up environment variables for building
+        call "C:\Program Files\Microsoft Visual Studio 8\VC\vcvarsall.bat" x86
+        set PATH=%PATH%;"C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Bin"
+
+    - name: Build DLL
+      run: |
+        # Build the DLL using MSVC 2005 Express
+        msbuild /p:Configuration=Release
+
+    - name: Upload DLL artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ImageSearchDLL
+        path: path/to/your/DLL/file.dll
