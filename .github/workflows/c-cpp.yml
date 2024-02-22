@@ -21,6 +21,13 @@ jobs:
     - name: Set up build environment
       run: |
         # Set up environment variables for building
+          & "C:\Program Files\Microsoft Visual Studio 8\VC\vcvarsall.bat" x86
+          $env:Path += ";C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Bin"
+
+
+    - name: Set up build environment
+      run: |
+        # Set up environment variables for building
         call "C:\Program Files\Microsoft Visual Studio 8\VC\vcvarsall.bat" x86
         set PATH=%PATH%;"C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Bin"
 
