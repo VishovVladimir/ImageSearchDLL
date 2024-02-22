@@ -16,8 +16,7 @@ jobs:
 
     - name: Build DLL
       run: |
-        cd ImageSearchDLL
-        msbuild /t:Rebuild /p:Configuration=Release
+        msbuild /t:Rebuild /p:Configuration=Release /p:Platform=x64 ImageSearchDLL/ImageSearchDLL.vcxproj
 
     - name: Upload DLL artifact
       uses: actions/upload-artifact@v2
